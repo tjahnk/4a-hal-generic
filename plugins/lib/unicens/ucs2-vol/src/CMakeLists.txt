@@ -16,7 +16,24 @@
 # limitations under the License.
 ###########################################################################
 
+# Add target to project dependency list
+PROJECT_TARGET_ADD(ucs2-volume)
 
-# Include any directory not starting with _
-# -----------------------------------------------------
-PROJECT_SUBDIRS_ADD()
+# Define targets source files
+ADD_LIBRARY(${TARGET_NAME} STATIC device_container.cpp  device_value.cpp  libmostvolume.cpp  setup.cpp)
+
+    # Library properties
+    SET_TARGET_PROPERTIES(${TARGET_NAME} PROPERTIES
+        OUTPUT_NAME ${TARGET_NAME}
+    )
+
+    # Library dependencies from PKG_REQUIRED_LIST
+    #TARGET_LINK_LIBRARIES(ucs2-volume     # Library dependencies (include updates automatically)
+    #    ${link_libraries}
+    #)
+
+    # Define properties to expose when others use this target
+    TARGET_INCLUDE_DIRECTORIES(${TARGET_NAME}
+       PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../inc
+    )
+

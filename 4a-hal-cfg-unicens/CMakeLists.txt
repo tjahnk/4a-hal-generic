@@ -1,5 +1,5 @@
 ###########################################################################
-# Copyright 2015, 2016, 2017 IoT.bzh
+# Copyright 2017, 2018 IoT.bzh
 #
 # author: Fulup Ar Foll <fulup@iot.bzh>
 #
@@ -16,7 +16,16 @@
 # limitations under the License.
 ###########################################################################
 
+##################################################
+# Control Policy Config file
+##################################################
+PROJECT_TARGET_ADD(4a-hal-cfg-unicens)
 
-# Include any directory not starting with _
-# -----------------------------------------------------
-PROJECT_SUBDIRS_ADD()
+	file(GLOB CONF_FILES "*.json")
+
+	add_input_files("${CONF_FILES}")
+
+	SET_TARGET_PROPERTIES(${TARGET_NAME} PROPERTIES
+	LABELS "BINDING-CONFIG"
+	OUTPUT_NAME ${TARGET_NAME}
+	)
